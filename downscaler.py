@@ -3,7 +3,7 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from PIL import Image as PILImage
 
-# 전역 변수 설정
+VERSION = [1, 0, 0]
 IMAGE_OPTIONS = ["16x16", "32x32", "64x64", "128x128", "256x256"]
 
 def resize_images(file_path, selected_resolution):
