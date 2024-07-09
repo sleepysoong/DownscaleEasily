@@ -1,16 +1,16 @@
 import os
 import tkinter as tk
 from tkinter import messagebox, ttk
-from PIL import Image as PILImage
+from PIL import Image
 
-VERSION = [1, 0, 0]
+VERSION = [1, 1, 0]
 IMAGE_OPTIONS = ["16x16", "32x32", "64x64", "128x128", "256x256"]
 
-def resize_images(file_path, selected_resolution):
+def resize_image(file_path, selected_resolution):
     try:
         width, height = map(int, selected_resolution.split("x"))
-        img = PILImage.open(file_path)
-        img_resized = img.resize((width, height), PILImage.LANCZOS)
+        img = Image.open(file_path)
+        img_resized = img.resize((width, height), Image.Resampling.NEAREST)
         new_file_path = os.path.join("after", os.path.basename(file_path))
         img_resized.save(new_file_path)
         return True
@@ -23,7 +23,7 @@ def resize_all_images(selected_resolution):
         os.makedirs("after")
     success_count = 0
     for file_path in loaded_images:
-        if resize_images(file_path, selected_resolution):
+        if resize_image(file_path, selected_resolution):
             success_count += 1
     messagebox.showinfo("완료", f"{success_count}개의 이미지가 성공적으로 {selected_resolution} 해상도로 변경되었습니다.")
 
